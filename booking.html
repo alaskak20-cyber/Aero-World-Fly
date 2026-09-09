@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aero World | Request a Booking</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fc;
+            color: #0b1f3a;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 14px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e4eaf1;
+        }
+
+        .logo img {
+            display: block;
+            width: auto;
+            max-width: 180px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .back-link {
+            color: #0b5eb7;
+            font-weight: 700;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .page-header {
+            background: #0b1f3a;
+            color: #ffffff;
+            text-align: center;
+            padding: 70px 7%;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            max-width: 760px;
+            margin: 0 auto;
+            color: #dce7f4;
+            font-size: 18px;
+        }
+
+        .response-box {
+            max-width: 800px;
+            margin: 28px auto 0;
+            padding: 18px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.10);
+            font-weight: 700;
+        }
+
+        .booking-section {
+            padding: 65px 7%;
+        }
+
+        .booking-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 45px;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(11, 31, 58, 0.08);
+        }
+
+        .booking-container h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .form-intro {
+            color: #66727f;
+            margin-bottom: 30px;
+        }
+
+        .service-selection {
+            margin-bottom: 35px;
+        }
+
+        .service-selection h3 {
+            margin-bottom: 8px;
+        }
+
+        .service-help {
+            color: #687687;
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+
+        .service-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .service-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .service-option label {
+            display: block;
+            padding: 18px 10px;
+            text-align: center;
+            border: 2px solid #dce4ed;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .service-option label:hover {
+            border-color: #0b6bd3;
+        }
+
+        .service-option input:checked + label {
+            background: #0b6bd3;
+            border-color: #0b6bd3;
+            color: #ffffff;
+        }
+
+        .service-panel {
+            display: none;
+            margin-top: 28px;
+            padding: 30px;
+            background: #f7faff;
+            border: 1px solid #dce8f5;
+            border-radius: 14px;
+        }
+
+        .service-panel.active {
+            display: block;
+        }
+
+        .service-panel h3 {
+            font-size: 23px;
+            margin-bottom: 5px;
+        }
+
+        .panel-intro {
+            color: #687687;
+            margin-bottom: 22px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label.field-label {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #d5dee8;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            background: #ffffff;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #0b6bd3;
+            box-shadow: 0 0 0 3px rgba(11, 107, 211, 0.08);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .customer-section {
+            margin-top: 35px;
+            padding-top: 35px;
+            border-top: 1px solid #e4eaf1;
+        }
+
+        .customer-section h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .customer-section p {
+            color: #687687;
+            margin-bottom: 22px;
+        }
+
+        .form-note {
+            margin-top: 28px;
+            padding: 18px;
+            background: #eaf4ff;
+            border: 1px solid #c9e2fa;
+            border-radius: 9px;
+            color: #47586a;
+            font-size: 14px;
+        }
+
+        .submit-area {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .submit-btn {
+            border: none;
+            padding: 16px 32px;
+            background: #0b6bd3;
+            color: #ffffff;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #0959b0;
+        }
+
+        footer {
+            background: #071425;
+            color: #dce7f4;
+            text-align: center;
+            padding: 28px 7%;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+
+        @media (max-width: 800px) {
+            .service-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .booking-container {
+                padding: 30px 22px;
+            }
+
+            .page-header h1 {
+                font-size: 38px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            header {
+                padding: 14px 5%;
+            }
+
+            .page-header {
+                padding: 55px 6%;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .booking-section {
+                padding: 45px 5%;
+            }
+
+            .service-options {
+                grid-template-columns: 1fr;
+            }
+
+            .back-link {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Aero World logo">
+        </a>
+
+        <a href="index.html" class="back-link">
+            ← Back to Home
+        </a>
+
+    </header>
+
+    <section class="page-header">
+
+        <h1>
+            Request a Booking
+        </h1>
+
+        <p>
+            Select every service you need, complete the details for each one,
+            and send all your requests together.
+        </p>
+
+        <div class="response-box">
+            ⚡ An Aero World travel agent will respond in less than 1 hour.
+        </div>
+
+    </section>
+
+    <section class="booking-section">
+
+        <div class="booking-container">
+
+            <h2>
+                Tell Us About Your Travel Plans
+            </h2>
+
+            <p class="form-intro">
+                You may choose one service or several services for the same trip.
+            </p>
+
+            <form
+                id="booking-form"
+                action="https://formsubmit.co/aeroworldtravelagent@gmail.com"
+                method="POST"
+            >
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="New Aero World Booking Request"
+                >
+
+                <input
+                    type="hidden"
+                    name="_captcha"
+                    value="false"
+                >
+
+                <div class="service-selection">
+
+                    <h3>
+                        What would you like to arrange?
+                    </h3>
+
+                    <p class="service-help">
+                        Select all services you need.
+                    </p>
+
+                    <div class="service-options">
+
+                        <div class="service-option">
+                            <input
+                                type="checkbox"
+                                id="flight"
+                                name="Requested services"
+                                value="Flight booking"
+                            >
+                            <label for="flight">✈️ Flight</label>
+                        </div>
+
+                        <div class="service-option">
+                            <input
+                                type="checkbox"
+                                id="hotel"
+                                name="Requested services"
+                                value="Hotel booking"
+                            >
+                            <label for="hotel">🏨 Hotel</label>
+                        </div>
+
+                        <div class="service-option">
+                            <input
+                                type="checkbox"
+                                id="car"
+                                name="Requested services"
+                                value="Car rental"
+                            >
+                            <label for="car">🚗 Car Rental</label>
+                        </div>
+
+                        <div class="service-option">
+                            <input
+                                type="checkbox"
+                                id="jet"
+                                name="Requested services"
+                                value="Private jet charter"
+                            >
+                            <label for="jet">🛩️ Private Jet</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- FLIGHT DETAILS -->
+
+                <section class="service-panel" data-service="flight">
+
+                    <h3>✈️ Flight Booking Details</h3>
+
+                    <p class="panel-intro">
+                        Tell us where and when you would like to fly.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label class="field-label" for="flight-from">
+                                Departure city or airport
+                            </label>
+                            <input
+                                type="text"
+                                id="flight-from"
+                                name="Flight departure"
+                                placeholder="e.g. London"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="flight-to">
+                                Destination city or airport
+                            </label>
+                            <input
+                                type="text"
+                                id="flight-to"
+                                name="Flight destination"
+                                placeholder="e.g. Dubai"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="flight-type">
+                                Trip type
+                            </label>
+                            <select id="flight-type" name="Flight trip type">
+                                <option value="">Choose one</option>
+                                <option>One-way</option>
+                                <option>Round-trip</option>
+                                <option>Multi-city</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="flight-departure">
+                                Departure date
+                            </label>
+                            <input
+                                type="date"
+                                id="flight-departure"
+                                name="Flight departure date"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="flight-return">
+                                Return date, if applicable
+                            </label>
+                            <input
+                                type="date"
+                                id="flight-return"
+                                name="Flight return date"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="flight-travelers">
+                                Number of travellers
+                            </label>
+                            <select
+                                id="flight-travelers"
+                                name="Flight travellers"
+                            >
+                                <option value="">Choose number</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="field-label" for="flight-class">
+                                Preferred travel class
+                            </label>
+                            <select id="flight-class" name="Flight class">
+                                <option value="">Choose class</option>
+                                <option>Economy</option>
+                                <option>Premium Economy</option>
+                                <option>Business Class</option>
+                                <option>First Class</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- HOTEL DETAILS -->
+
+                <section class="service-panel" data-service="hotel">
+
+                    <h3>🏨 Hotel Booking Details</h3>
+
+                    <p class="panel-intro">
+                        Tell us where you would like to stay.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label class="field-label" for="hotel-location">
+                                City or destination
+                            </label>
+                            <input
+                                type="text"
+                                id="hotel-location"
+                                name="Hotel location"
+                                placeholder="e.g. Dubai"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="hotel-guests">
+                                Number of guests
+                            </label>
+                            <select id="hotel-guests" name="Hotel guests">
+                                <option value="">Choose number</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="hotel-checkin">
+                                Check-in date
+                            </label>
+                            <input
+                                type="date"
+                                id="hotel-checkin"
+                                name="Hotel check-in date"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="hotel-checkout">
+                                Check-out date
+                            </label>
+                            <input
+                                type="date"
+                                id="hotel-checkout"
+                                name="Hotel check-out date"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="hotel-rooms">
+                                Number of rooms
+                            </label>
+                            <select id="hotel-rooms" name="Hotel rooms">
+                                <option value="">Choose number</option>
+                                <option>1 room</option>
+                                <option>2 rooms</option>
+                                <option>3 rooms</option>
+                                <option>4+ rooms</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="hotel-type">
+                                Preferred accommodation
+                            </label>
+                            <select id="hotel-type" name="Hotel preference">
+                                <option value="">Choose preference</option>
+                                <option>Budget</option>
+                                <option>Standard</option>
+                                <option>Luxury</option>
+                                <option>Resort</option>
+                                <option>Apartment</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- CAR RENTAL DETAILS -->
+
+                <section class="service-panel" data-service="car">
+
+                    <h3>🚗 Car Rental Details</h3>
+
+                    <p class="panel-intro">
+                        Tell us where you need the vehicle and your preferred type.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label class="field-label" for="car-pickup">
+                                Pickup location
+                            </label>
+                            <input
+                                type="text"
+                                id="car-pickup"
+                                name="Car pickup location"
+                                placeholder="e.g. Barcelona Airport"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="car-dropoff">
+                                Drop-off location
+                            </label>
+                            <input
+                                type="text"
+                                id="car-dropoff"
+                                name="Car drop-off location"
+                                placeholder="Same location or another city"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="car-pickup-date">
+                                Pickup date
+                            </label>
+                            <input
+                                type="date"
+                                id="car-pickup-date"
+                                name="Car pickup date"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="car-return-date">
+                                Return date
+                            </label>
+                            <input
+                                type="date"
+                                id="car-return-date"
+                                name="Car return date"
+                            >
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="field-label" for="car-type">
+                                Preferred vehicle type
+                            </label>
+                            <select id="car-type" name="Car type">
+                                <option value="">Choose vehicle type</option>
+                                <option>Economy</option>
+                                <option>Compact</option>
+                                <option>Sedan</option>
+                                <option>SUV</option>
+                                <option>Luxury</option>
+                                <option>Van / Minibus</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- PRIVATE JET DETAILS -->
+
+                <section class="service-panel" data-service="jet">
+
+                    <h3>🛩️ Private Jet Charter Details</h3>
+
+                    <p class="panel-intro">
+                        Share your charter needs and a travel agent will assist you.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label class="field-label" for="jet-from">
+                                Departure city or airport
+                            </label>
+                            <input
+                                type="text"
+                                id="jet-from"
+                                name="Private jet departure"
+                                placeholder="e.g. Paris"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="jet-to">
+                                Destination city or airport
+                            </label>
+                            <input
+                                type="text"
+                                id="jet-to"
+                                name="Private jet destination"
+                                placeholder="e.g. Nice"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="jet-date">
+                                Preferred departure date
+                            </label>
+                            <input
+                                type="date"
+                                id="jet-date"
+                                name="Private jet departure date"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="jet-passengers">
+                                Number of passengers
+                            </label>
+                            <select
+                                id="jet-passengers"
+                                name="Private jet passengers"
+                            >
+                                <option value="">Choose number</option>
+                                <option>1–4</option>
+                                <option>5–8</option>
+                                <option>9–12</option>
+                                <option>13+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="field-label" for="jet-notes">
+                                Charter requirements
+                            </label>
+                            <textarea
+                                id="jet-notes"
+                                name="Private jet requirements"
+                                placeholder="For example: return journey, preferred departure time, luggage, catering, or any special request."
+                            ></textarea>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- CUSTOMER DETAILS -->
+
+                <section class="customer-section">
+
+                    <h3>
+                        Your Contact Details
+                    </h3>
+
+                    <p>
+                        We use these details to reply to your request.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label class="field-label" for="name">
+                                Full name
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="Customer name"
+                                placeholder="Your full name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="email">
+                                Email address
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="whatsapp">
+                                WhatsApp number
+                            </label>
+                            <input
+                                type="tel"
+                                id="whatsapp"
+                                name="Customer WhatsApp number"
+                                placeholder="Include country code, e.g. +44 7700 900000"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="field-label" for="contact-method">
+                                Preferred contact method
+                            </label>
+                            <select
+                                id="contact-method"
+                                name="Preferred contact method"
+                                required
+                            >
+                                <option value="">Choose one</option>
+                                <option>WhatsApp</option>
+                                <option>Email</option>
+                                <option>Phone call</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="field-label" for="additional-notes">
+                                Anything else we should know?
+                            </label>
+                            <textarea
+                                id="additional-notes"
+                                name="Additional notes"
+                                placeholder="Add any questions, special requirements, or other useful information."
+                            ></textarea>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <div class="form-note">
+                    <strong>How it works:</strong> choose the services you need,
+                    complete the details that appear, then send one request.
+                    An Aero World travel agent will respond in less than 1 hour.
+                </div>
+
+                <div class="submit-area">
+                    <button type="submit" class="submit-btn">
+                        Send My Booking Request
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <footer>
+
+        <p>
+            <strong>AERO WORLD</strong> — Your World. Our Expertise.
+        </p>
+
+        <p>
+            © 2026 Aero World. All rights reserved.
+        </p>
+
+    </footer>
+
+    <script>
+        const serviceCheckboxes = document.querySelectorAll(
+            ".service-option input"
+        );
+
+        const servicePanels = document.querySelectorAll(
+            ".service-panel"
+        );
+
+        function updateServicePanels() {
+            servicePanels.forEach(function (panel) {
+                const serviceName = panel.dataset.service;
+                const checkbox = document.getElementById(serviceName);
+                const isSelected = checkbox.checked;
+
+                panel.classList.toggle("active", isSelected);
+
+                panel.querySelectorAll("input, select, textarea").forEach(
+                    function (field) {
+                        field.disabled = !isSelected;
+                    }
+                );
+            });
+        }
+
+        serviceCheckboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", updateServicePanels);
+        });
+
+        updateServicePanels();
+
+        document
+            .getElementById("booking-form")
+            .addEventListener("submit", function (event) {
+                const hasSelectedService = Array.from(serviceCheckboxes).some(
+                    function (checkbox) {
+                        return checkbox.checked;
+                    }
+                );
+
+                if (!hasSelectedService) {
+                    event.preventDefault();
+
+                    alert(
+                        "Please select at least one service before sending your request."
+                    );
+                }
+            });
+    </script>
+
+</body>
+</html>

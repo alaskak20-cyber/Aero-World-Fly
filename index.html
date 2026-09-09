@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aero World | Your World. Our Expertise.</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #0b1f3a;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 14px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e8edf3;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            display: block;
+            width: auto;
+            max-width: 190px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #0b1f3a;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #0b6bd3;
+        }
+
+        .hero {
+            min-height: 680px;
+            background:
+                linear-gradient(
+                    rgba(5, 30, 60, 0.72),
+                    rgba(5, 30, 60, 0.72)
+                ),
+                url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=80");
+
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 90px 7%;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: #ffffff;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.30);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.08;
+            margin-bottom: 22px;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            line-height: 1.7;
+            color: #eef5ff;
+            margin-bottom: 18px;
+        }
+
+        .response-promise {
+            font-size: 17px;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 20px 0 30px;
+        }
+
+        .buttons,
+        .contact-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .contact-buttons {
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: 0.25s ease;
+        }
+
+        .btn-primary {
+            background: #0b6bd3;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #0959b0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #0b1f3a;
+        }
+
+        .btn-secondary:hover {
+            background: #edf4fb;
+            transform: translateY(-2px);
+        }
+
+        .services,
+        .why-us,
+        .agent {
+            padding: 85px 7%;
+            text-align: center;
+        }
+
+        .section-label {
+            color: #0b6bd3;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        .services h2,
+        .why-us h2,
+        .agent h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .services-intro {
+            max-width: 800px;
+            margin: 0 auto 55px;
+            color: #5b6572;
+            font-size: 17px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .service-card {
+            padding: 35px 25px;
+            border-radius: 16px;
+            background: #f5f9fd;
+            border: 1px solid #e8eef5;
+            text-align: left;
+            transition: 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(11, 31, 58, 0.08);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 18px;
+        }
+
+        .service-card h3,
+        .why-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .service-card p,
+        .why-card p {
+            color: #626d79;
+        }
+
+        .why-us {
+            background: #f7faff;
+        }
+
+        .why-grid {
+            max-width: 1100px;
+            margin: 45px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .why-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e8eef5;
+        }
+
+        .agent {
+            background: #0b1f3a;
+            color: #ffffff;
+        }
+
+        .agent-description {
+            max-width: 760px;
+            margin: 0 auto 18px;
+            color: #dce7f4;
+            font-size: 17px;
+        }
+
+        .agent-promise {
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            background: #071425;
+            color: #dce7f4;
+            text-align: center;
+            padding: 28px 7%;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+
+
+        .testimonials {
+            padding: 85px 7%;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .testimonials-intro {
+            max-width: 800px;
+            margin: 0 auto 45px;
+            color: #5b6572;
+            font-size: 17px;
+        }
+
+        .testimonial-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            text-align: left;
+        }
+
+        .testimonial-card {
+            background: #f7faff;
+            border: 1px solid #e8eef5;
+            border-radius: 16px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial-stars {
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card blockquote {
+            color: #4e5b69;
+            font-size: 15px;
+            line-height: 1.75;
+            margin: 0 0 20px;
+        }
+
+        .testimonial-author {
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #e1e8f0;
+            font-weight: 800;
+            color: #0b1f3a;
+        }
+
+        .testimonial-location {
+            display: block;
+            margin-top: 3px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #6b7785;
+        }
+
+        @media (max-width: 1000px) {
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 52px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 620px;
+                padding: 70px 6%;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero-description {
+                font-size: 17px;
+            }
+
+            .service-grid,
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials h2 {
+                font-size: 34px;
+            }
+
+            .services h2,
+            .why-us h2,
+            .agent h2 {
+                font-size: 34px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Aero World logo">
+        </a>
+
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#why-us">Why Us</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-tag">
+                YOUR PERSONAL TRAVEL PARTNER
+            </div>
+
+            <h1>
+                Your World.<br>
+                Our Expertise.
+            </h1>
+
+            <p class="hero-description">
+                Save 30% on flights, hotels, car rentals and private-jet
+                charters compared with prices available on other travel
+                websites. Through our exclusive global contracts with airlines,
+                hotels, car-rental providers and private-jet charter partners,
+                Aero World gives you access to better travel rates worldwide.
+            </p>
+
+            <p class="response-promise">
+                ✨ EXCLUSIVE GLOBAL TRAVEL RATES — SAVE 30% ON FLIGHTS,
+                HOTELS, CAR RENTALS AND PRIVATE JET CHARTERS.
+            </p>
+
+            <div class="buttons">
+
+                <a href="booking.html" class="btn btn-primary">
+                    Request a Booking
+                </a>
+
+                <a href="#contact" class="btn btn-secondary">
+                    Talk to an Agent
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="services" id="services">
+
+        <div class="section-label">
+            OUR SERVICES
+        </div>
+
+        <h2>
+            Global Travel, Better Rates
+        </h2>
+
+        <p class="services-intro">
+            Aero World connects you to exclusive worldwide travel rates through
+            our contracts with airlines, hotels, car-rental providers and
+            private-jet charter partners.
+        </p>
+
+        <div class="service-grid">
+
+            <div class="service-card">
+
+                <div class="service-icon">✈️</div>
+
+                <h3>Flight Bookings</h3>
+
+                <p>
+                    Save 30% on flight bookings compared with other travel
+                    websites, with options tailored to your route and dates.
+                </p>
+
+            </div>
+
+            <div class="service-card">
+
+                <div class="service-icon">🏨</div>
+
+                <h3>Hotel Bookings</h3>
+
+                <p>
+                    Save 30% on accommodation through our global hotel
+                    partnerships and personalised travel support.
+                </p>
+
+            </div>
+
+            <div class="service-card">
+
+                <div class="service-icon">🚗</div>
+
+                <h3>Car Rentals</h3>
+
+                <p>
+                    Save 30% on car-rental arrangements for airport travel,
+                    holidays, business trips and more.
+                </p>
+
+            </div>
+
+            <div class="service-card">
+
+                <div class="service-icon">🛩️</div>
+
+                <h3>Private Jets</h3>
+
+                <p>
+                    Save 30% on private-jet charter options through our
+                    exclusive worldwide charter partnerships.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="why-us" id="why-us">
+
+        <div class="section-label">
+            WHY AERO WORLD
+        </div>
+
+        <h2>
+            Travel With Someone on Your Side
+        </h2>
+
+        <div class="why-grid">
+
+            <div class="why-card">
+
+                <h3>Personal Assistance</h3>
+
+                <p>
+                    Speak with a travel agent who understands your request and
+                    guides you through the booking process.
+                </p>
+
+            </div>
+
+            <div class="why-card">
+
+                <h3>Exclusive Global Contracts</h3>
+
+                <p>
+                    Our worldwide relationships with airlines, hotels,
+                    car-rental providers and private-jet charter partners
+                    help us offer rates that are 30% lower than comparable
+                    online prices.
+                </p>
+
+            </div>
+
+            <div class="why-card">
+
+                <h3>Fast Response</h3>
+
+                <p>
+                    Submit your enquiry and an Aero World travel agent will
+                    respond in less than one hour.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="testimonials" id="reviews">
+
+        <div class="section-label">CUSTOMER EXPERIENCES</div>
+
+        <h2>What Our Travelers Say</h2>
+
+        <p class="testimonials-intro">Real experiences from travelers who trusted Aero World to help arrange their journeys.</p>
+
+        <div class="testimonial-grid">
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                <blockquote>“I was planning an international trip and wasn't sure where to begin, especially with so many flight options available. Aero World made the process much simpler than I expected. My agent first understood my travel dates, budget and preferences before presenting suitable options. I particularly appreciated that I wasn't pressured into choosing the most expensive option. We compared different possibilities together until we found one that worked for me. The booking itself was straightforward, and I was guided through each step until everything was confirmed. It was reassuring to have someone available to handle the details instead of trying to figure everything out myself. A very smooth experience.”</blockquote>
+                <div class="testimonial-author">
+                    Daniel Okafor
+                    <span class="testimonial-location">Nigeria</span>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                <blockquote>“What stood out to me most was the personal attention. I had a few changes to my original travel plans, and instead of having to start the entire process again, my Aero World agent worked around the changes and helped me adjust everything. Communication was quick and professional throughout. I also wasn't expecting to find such a comfortable option within my budget. The final arrangement felt much more premium than what I had initially planned for. Aero World made the experience feel less like a standard booking and more like having someone organize the travel around my needs.”</blockquote>
+                <div class="testimonial-author">
+                    Amara Bennett
+                    <span class="testimonial-location">United Kingdom</span>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="4 out of 5 stars">⭐⭐⭐⭐</div>
+                <blockquote>“I contacted Aero World because I was having difficulty comparing the different travel options available for my trip. The agent was able to break everything down in a way that was easy to understand and helped me decide which option made the most sense. I liked that the recommendations were based on what I actually needed rather than simply showing me the most expensive choices. The booking was completed without much difficulty, and the agent remained available when I needed clarification. There was a small delay during one part of the process, but it was resolved quickly. Overall, a very useful service and a much easier experience than arranging everything independently.”</blockquote>
+                <div class="testimonial-author">
+                    Kenji Takahashi
+                    <span class="testimonial-location">Japan</span>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                <blockquote>“I wanted my trip to feel special without spending an unreasonable amount, and Aero World managed to strike that balance beautifully. I explained the kind of experience I was looking for, and my agent came back with several options that I hadn't considered. What I appreciated was being able to discuss the differences between them before making a decision. There was never any pressure. The final choice gave me the comfort and quality I wanted while staying within the price range I had in mind. The entire process was handled with a level of care that made me feel confident about my booking.”</blockquote>
+                <div class="testimonial-author">
+                    Sofia Moretti
+                    <span class="testimonial-location">Italy</span>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                <blockquote>“My favourite part of the experience was how quickly everything came together. I needed help arranging my trip and didn't have much time to spend researching flights myself. After giving Aero World my requirements, the agent came back with suitable options and helped me narrow them down. Questions were answered promptly, and the booking process moved along much faster than I anticipated. I also received useful explanations about the different options rather than simply being given a price. It saved me a lot of time and made planning the trip considerably less stressful.”</blockquote>
+                <div class="testimonial-author">
+                    Mateo Alvarez
+                    <span class="testimonial-location">Spain</span>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="4 out of 5 stars">⭐⭐⭐⭐</div>
+                <blockquote>“I had quite a few questions before confirming my booking because I wanted to be certain I understood exactly what I was paying for. My Aero World agent patiently went through the details with me and explained the differences between the available options. That gave me much more confidence in making my decision. I was also pleasantly surprised by the range of choices available at different price points. The service was friendly and professional, and I appreciated being able to ask questions without feeling rushed. There was a little back-and-forth before everything was finalized, but the end result was worth it.”</blockquote>
+                <div class="testimonial-author">
+                    Aisha Rahman
+                    <span class="testimonial-location">Bangladesh</span>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                <blockquote>“I originally thought booking a premium travel experience would be far outside my budget, so I contacted Aero World mainly to see what was possible. I was pleasantly surprised by the options they were able to find. Rather than simply quoting one price, the agent showed me alternatives and explained what I would gain or lose with each one. That made it much easier to choose something that represented good value. The communication was also very convenient, especially when I had last-minute questions. Everything was eventually arranged exactly as I wanted, and the experience was far more accessible than I had imagined.”</blockquote>
+                <div class="testimonial-author">
+                    Liam O'Connor
+                    <span class="testimonial-location">Ireland</span>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                <blockquote>“I appreciated how organized the entire process was. From the initial enquiry to the final confirmation, I always knew what stage my booking was at and what information was needed from me. My agent was particularly good at explaining things that I wasn't familiar with, which removed a lot of uncertainty. They also took my preferences seriously instead of treating the booking as a one-size-fits-all arrangement. The options presented to me offered a great combination of comfort and reasonable pricing. By the time everything was confirmed, I felt completely comfortable with the arrangements.”</blockquote>
+                <div class="testimonial-author">
+                    Nadia Petrov
+                    <span class="testimonial-location">Eastern Europe</span>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="4 out of 5 stars">⭐⭐⭐⭐</div>
+                <blockquote>“I came to Aero World looking for a better way to arrange my travel because I didn't want to spend hours comparing websites and trying to understand all the different options myself. Having an agent handle that part made a noticeable difference. I explained my priorities and received several suitable choices to consider. I was able to ask questions, compare the options and settle on one that offered a good balance between cost and comfort. The agent was responsive whenever I needed help, and the booking was handled professionally. There was one minor communication issue along the way, but it was resolved without much trouble. Overall, a positive experience.”</blockquote>
+                <div class="testimonial-author">
+                    Ethan Williams
+                    <span class="testimonial-location">United States</span>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                <blockquote>“I had a fairly specific idea of the type of travel experience I wanted, including a certain level of comfort, but I wasn't sure whether I could achieve it at a reasonable price. Aero World surprised me with the range of possibilities they were able to provide. My agent took the time to understand what mattered most to me and then helped me work through the available choices. I never felt pushed toward a particular option. Once I made my decision, the remaining steps were handled efficiently and I received confirmation without unnecessary complications. The combination of convenience, choice and personal assistance is what impressed me most.”</blockquote>
+                <div class="testimonial-author">
+                    Leila Haddad
+                    <span class="testimonial-location">Morocco</span>
+                </div>
+            </article>
+
+        </div>
+
+    </section>
+
+    <section class="agent" id="contact">
+
+        <div class="section-label">
+            SPEAK WITH A TRAVEL AGENT
+        </div>
+
+        <h2>
+            Ready to Plan Your Journey?
+        </h2>
+
+        <p class="agent-description">
+            Request your booking today and discover exclusive worldwide rates
+            on flights, hotels, car rentals and private-jet charters.
+        </p>
+
+        <p class="agent-promise">
+            ⚡ We respond in less than 1 hour.
+        </p>
+
+        <div class="contact-buttons">
+
+            <a href="booking.html" class="btn btn-primary">
+                Request a Booking
+            </a>
+
+            <!-- Replace 15551234567 with your real WhatsApp number later. -->
+            <a
+                href="https://wa.me/15551234567"
+                class="btn btn-secondary"
+            >
+                WhatsApp Us
+            </a>
+
+            <a
+                href="mailto:aeroworldtravelagent@gmail.com?subject=Aero%20World%20Travel%20Enquiry"
+                class="btn btn-secondary"
+            >
+                Email Us
+            </a>
+
+        </div>
+
+    </section>
+
+    <footer>
+
+        <p>
+            <strong>AERO WORLD</strong> — Your World. Our Expertise.
+        </p>
+
+        <p>
+            © 2026 Aero World. All rights reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>
